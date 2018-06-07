@@ -141,5 +141,13 @@
   </main>
 
   <script src="es6/scroll.js"></script>
+  <script>
+    addEventListener('click', e => {
+      if (e.target.href && e.target.hash) {
+        e.preventDefault();
+        scroll(e, 151);
+      }
+    });
+  </script>
 </body>
 </html>

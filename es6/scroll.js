@@ -30,10 +30,3 @@ const scroll = (e,height = 20) => {
   }
   
 };
-
-addEventListener('click', e => {
-  if (e.target.href && e.target.hash) {
-    e.preventDefault();
-    scroll(e, 151);
-  }
-});
