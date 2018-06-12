@@ -7,28 +7,27 @@ var scroll = function scroll(e) {
 
   // Check if the element exists
   if (el) {
-    var tf = true;
-    var initial = function initial() {
-      return document.body.scrollTop;
+
+    //  scrollTop fix
+    var _scroll = document.body.scrollTop || document.scrollingElement.scrollTop,
+        initial = function initial() {
+      return _scroll;
     },
         final = function final() {
       return Math.floor(el.getBoundingClientRect().y + initial() - height);
     },
-        y = 10,
+        acceleration = Math.ceil((final() - initial()) / 250),
         animate = setInterval(function () {
-      if (tf) {
+
+      window.scrollBy(0, acceleration);
+
+      if (acceleration > 0) {
+        if (initial() > final() - acceleration) {
+          clearInterval(animate);
+        }
+      } else {
         if (initial() < final()) {
-          window.scrollBy(0, y);
-          if (initial() > final()) {
-            tf = false;
-            clearInterval(animate);
-          }
-        } else {
-          window.scrollBy(0, -y);
-          if (initial() < final()) {
-            tf = false;
-            clearInterval(animate);
-          }
+          clearInterval(animate);
         }
       }
     }, 1);
