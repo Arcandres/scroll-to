@@ -9,22 +9,25 @@ const scroll = (e,height = 20) => {
                          document.scrollingElement.scrollTop,
           initial      = () => scroll,
           final        = () => Math.floor(el.getBoundingClientRect().y + initial() - height),
-          acceleration = Math.ceil((final() - initial()) / 250),
+          acceleration = Math.ceil((final() - initial()) / 80);
+    let      animation = requestAnimationFrame(animate);
 
-          animate      = setInterval(() => {
-            
-            window.scrollBy(0, acceleration);
+    function animate() {
+      window.scrollBy(0, acceleration);
+      animation = requestAnimationFrame(animate);
+      
+      if (acceleration > 0) {
+        if (initial() > final() - (acceleration)) {
+          console.log('counter');
+          cancelAnimationFrame(animation)
+        }
+      } else {
+        if (initial() < final()) {
+          cancelAnimationFrame(animation)
+        }
+      }
 
-            if (acceleration > 0) {
-              if (initial() > final() - (acceleration)) {
-                clearInterval(animate);
-              }
-            } else {
-              if (initial() < final()) {
-                clearInterval(animate);
-              }
-            }
-          }, 1);
+    }
   } else {
     // NUll
     console.log(el);
