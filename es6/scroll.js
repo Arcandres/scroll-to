@@ -18,7 +18,6 @@ const scroll = (e,height = 20) => {
       
       if (acceleration > 0) {
         if (initial() > final() - (acceleration)) {
-          console.log('counter');
           cancelAnimationFrame(animation)
         }
       } else {

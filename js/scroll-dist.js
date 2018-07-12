@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var scroll = function scroll(e) {
   var height = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 20;
@@ -13,7 +13,6 @@ var scroll = function scroll(e) {
 
       if (acceleration > 0) {
         if (initial() > final() - acceleration) {
-          console.log('counter');
           cancelAnimationFrame(animation);
         }
       } else {
